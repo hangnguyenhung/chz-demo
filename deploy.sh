@@ -3,15 +3,15 @@
 # Path to the project directory
 #/Users/hunghang/Documents/chz-new
 #/Volumes/ssd/Documents/chz-new
-PROJECT_DIR="/Volumes/ssd/Documents/chz-new"
+PROJECT_DIR="/Volumes/ssd/Documents/chz-demo"
 
 # Remote server details
 REMOTE_USER="root"
 REMOTE_HOST="147.93.106.119"
-REMOTE_DIR="/zserver/node/chz"
+REMOTE_DIR="/zserver/node/chz-demo"
 
 # Application name in pm2
-PM2_APP_NAME="nextjs_app"
+PM2_APP_NAME="chz-demo"
 
 # Navigate to the project directory
 cd "$PROJECT_DIR" || { echo "Unable to access project directory"; exit 1; }

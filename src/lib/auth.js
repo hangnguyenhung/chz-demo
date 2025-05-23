@@ -3,7 +3,6 @@ import axios from "axios";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 const root_api = process.env.API_ROOT;
-const root_customer_api = "http://147.93.106.119:5801";
 
 export const authOptions = {
     providers: [
@@ -32,12 +31,27 @@ export const authOptions = {
                     throw new Error(resLogin.data.err);
                 }
 
+                const configProfile = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Token: resLogin.data.data.token,
+                    },
+                    url: `${root_api}/api/account/get_info`,
+                };
+
+                const resProfile = await axios.request(configProfile);
+
+                if (resProfile.data.err) {
+                    throw new Error(resProfile.data.err);
+                }
+
                 return {
                     id: username,
                     name: username,
-                    email: "customer@gmail.com",
+                    email: resProfile.data.data.profile.email,
                     token: resLogin.data.data.token,
-                    account_type: "customer",
+                    account_type: resProfile.data.data.profile.account_type,
                 };
             },
         }),
